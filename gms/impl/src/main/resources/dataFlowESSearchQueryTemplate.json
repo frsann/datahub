@@ -4,15 +4,23 @@
       "query_string": {
         "query": "$INPUT",
         "fields": [
-          "name^4",
-          "dataFlow"
-         ],
+          "flowId^4",
+          "orchestrator",
+          "cluster"
+        ],
         "default_operator": "and",
         "analyzer": "standard"
       }
     },
     "functions": [
-
+      {
+        "filter": {
+          "term": {
+            "removed": false
+          }
+        },
+        "weight": 2
+      }
     ],
     "score_mode": "multiply"
   }

@@ -1,0 +1,26 @@
+namespace com.linkedin.dataset
+
+import com.linkedin.common.DataFlowUrn
+
+
+/**
+ * Key for dataset resource
+ */
+record DataJobKey {
+
+  /**
+   * Standardized platform urn where dataset is defined. The data platform Urn (urn:li:platform:{platform_name})
+   */
+  @validate.`com.linkedin.dataset.rest.validator.DataFlowValidator` = { }
+  dataFlow: DataFlowUrn
+
+  /**
+   * Dataset native name e.g. {db}.{table}, /dir/subdir/{name}, or {name}
+   */
+  @validate.strlen = {
+    "max" : 200,
+    "min" : 1
+  }
+  jobId: string
+
+}

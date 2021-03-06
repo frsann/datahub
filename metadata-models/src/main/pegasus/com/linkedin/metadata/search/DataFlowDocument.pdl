@@ -1,0 +1,41 @@
+namespace com.linkedin.metadata.search
+
+import com.linkedin.common.AccessLevel
+import com.linkedin.common.DataFlowUrn
+
+/**
+ * Data model for DataFlow entity search
+ */
+record DataFlowDocument includes BaseDocument {
+
+  /**
+   * Urn for the DataFlow
+   */
+  urn: DataFlowUrn
+
+  /**
+   * Title of the dashboard
+   */
+  flowId: optional string
+
+  /**
+   * Detailed description about the dashboard
+   */
+  description: optional string
+
+  /**
+   * Dashboard tool ex: Looker, Redash
+   */
+  orchestrator: optional string
+
+  /**
+   * Dashboard tool ex: Looker, Redash
+   */
+  cluster: optional string
+
+  /**
+   * LDAP usernames of corp users who are the owners of this dashboard
+   */
+  owners: optional array[string]
+
+}

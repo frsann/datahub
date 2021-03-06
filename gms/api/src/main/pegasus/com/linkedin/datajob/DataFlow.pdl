@@ -1,0 +1,25 @@
+namespace com.linkedin.datajob
+
+import com.linkedin.common.ChangeAuditStamps
+import com.linkedin.common.DataFlowUrn
+import com.linkedin.common.Ownership
+import com.linkedin.datajob.DataFlowInfo
+
+import com.linkedin.ml.metadata.MLFeatureProperties
+
+/**
+ * MLFeature spec. for a feature store. A collection of MLFeature metadata schema that can evolve over time.
+ */
+record DataFlow includes DataFlowKey, ChangeAuditStamps {
+
+  /**
+   * Ownership Info
+   */
+  ownership: optional Ownership
+
+  /**
+   * Ownership Info
+   */
+   info: optional DataFlowInfo
+
+}

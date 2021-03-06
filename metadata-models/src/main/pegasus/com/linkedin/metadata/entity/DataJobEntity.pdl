@@ -1,0 +1,26 @@
+namespace com.linkedin.metadata.entity
+
+import com.linkedin.common.DataJobUrn
+
+/**
+ * Data model for a DataFlow entity
+ */
+record DataJobEntity includes BaseEntity {
+
+  /**
+   * Urn for the DataJobUrn
+   */
+  urn: DataJobUrn
+
+  /**
+   *
+   */
+  flow: optional string
+
+  /**
+   *
+   */
+  jobId: optional string
+
+
+}

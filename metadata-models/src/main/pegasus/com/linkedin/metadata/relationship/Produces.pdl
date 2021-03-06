@@ -1,0 +1,9 @@
+/**
+ * A generic model for the
+ */
+@pairings = [ {
+  "destination" : "com.linkedin.common.urn.DatasetUrn",
+  "source" : "com.linkedin.common.urn.DataJobUrn"
+} ]
+record Produces includes BaseRelationship {
+}

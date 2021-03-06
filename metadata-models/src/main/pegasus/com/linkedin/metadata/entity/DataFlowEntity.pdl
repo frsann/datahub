@@ -1,0 +1,31 @@
+namespace com.linkedin.metadata.entity
+
+import com.linkedin.common.DataFlowUrn
+
+/**
+ * Data model for a DataFlow entity
+ */
+record DataFlowEntity includes BaseEntity {
+
+  /**
+   * Urn for the DataFlow
+   */
+  urn: DataFlowUrn
+
+  /**
+   *
+   */
+  orchestrator: optional string
+
+  /**
+   *
+   */
+  flowId: optional string
+
+  /**
+   *
+   */
+  cluster: optional string
+
+
+}
