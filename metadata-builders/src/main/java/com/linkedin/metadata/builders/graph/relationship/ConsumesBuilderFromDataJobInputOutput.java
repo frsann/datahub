@@ -1,6 +1,6 @@
 package com.linkedin.metadata.builders.graph.relationship;
 
-import com.linkedin.common.DataJobInputOutput;
+import com.linkedin.datajob.DataJobInputOutput;
 import com.linkedin.common.urn.Urn;
 import com.linkedin.metadata.builders.graph.GraphBuilder;
 import com.linkedin.metadata.relationship.Consumes;
@@ -25,9 +25,8 @@ public class ConsumesBuilderFromDataJobInputOutput extends BaseRelationshipBuild
   public List<GraphBuilder.RelationshipUpdates> buildRelationships(@Nonnull Urn urn, @Nonnull DataJobInputOutput inputOutput) {
     final List<Consumes> inputsList = inputOutput.getInputDatasets()
         .stream()
-        .map(inputDataset -> new Consumes().setSource(inputDatast).setDestination(urn)
+        .map(inputDataset -> new Consumes().setSource(inputDataset).setDestination(urn))
         .collect(Collectors.toList());
-
 
     return Collections.singletonList(new GraphBuilder.RelationshipUpdates(inputsList, REMOVE_ALL_EDGES_FROM_SOURCE));
   }

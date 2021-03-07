@@ -1,15 +1,5 @@
 {
   "models" : [ {
-    "type" : "enum",
-    "name" : "AccessLevel",
-    "namespace" : "com.linkedin.common",
-    "doc" : "The various access levels",
-    "symbols" : [ "PUBLIC", "PRIVATE" ],
-    "symbolDocs" : {
-      "PRIVATE" : "Private availability to certain set of users",
-      "PUBLIC" : "Publicly available access level"
-    }
-  }, {
     "type" : "record",
     "name" : "AuditStamp",
     "namespace" : "com.linkedin.common",
@@ -61,65 +51,37 @@
     } ]
   }, {
     "type" : "typeref",
-    "name" : "ChartUrn",
+    "name" : "DataFlowUrn",
     "namespace" : "com.linkedin.common",
-    "doc" : "Standardized chart identifier",
+    "doc" : "Standardized data processing flow identifier.",
     "ref" : "string",
     "java" : {
-      "class" : "com.linkedin.common.urn.ChartUrn"
+      "class" : "com.linkedin.common.urn.DataFlowUrn"
     },
     "validate" : {
       "com.linkedin.common.validator.TypedUrnValidator" : {
         "accessible" : true,
         "constructable" : true,
-        "doc" : "Standardized chart identifier",
-        "entityType" : "chart",
+        "doc" : "Standardized data processing flow identifier.",
+        "entityType" : "dataFlow",
         "fields" : [ {
-          "doc" : "The name of the dashboard tool such as looker, redash etc.",
-          "maxLength" : 20,
-          "name" : "dashboardTool",
+          "doc" : "Workflow manager like azkaban, airflow which orchestrates the flow",
+          "maxLength" : 50,
+          "name" : "orchestrator",
           "type" : "string"
         }, {
-          "doc" : "Unique id for the chart. This id should be globally unique for a dashboarding tool even when there are multiple deployments of it. As an example, chart URL could be used here for Looker such as 'looker.linkedin.com/looks/1234'",
+          "doc" : "Unique Identifier of the data flow",
           "maxLength" : 200,
-          "name" : "chartId",
-          "type" : "string"
-        } ],
-        "maxLength" : 236,
-        "name" : "Chart",
-        "namespace" : "li",
-        "owners" : [ "urn:li:corpuser:fbar", "urn:li:corpuser:bfoo" ],
-        "owningTeam" : "urn:li:internalTeam:datahub"
-      }
-    }
-  }, {
-    "type" : "typeref",
-    "name" : "DashboardUrn",
-    "namespace" : "com.linkedin.common",
-    "doc" : "Standardized dashboard identifier",
-    "ref" : "string",
-    "java" : {
-      "class" : "com.linkedin.common.urn.DashboardUrn"
-    },
-    "validate" : {
-      "com.linkedin.common.validator.TypedUrnValidator" : {
-        "accessible" : true,
-        "constructable" : true,
-        "doc" : "Standardized dashboard identifier",
-        "entityType" : "dashboard",
-        "fields" : [ {
-          "doc" : "The name of the dashboard tool such as looker, redash etc.",
-          "maxLength" : 20,
-          "name" : "dashboardTool",
+          "name" : "flowId",
           "type" : "string"
         }, {
-          "doc" : "Unique id for the dashboard. This id should be globally unique for a dashboarding tool even when there are multiple deployments of it. As an example, dashboard URL could be used here for Looker such as 'looker.linkedin.com/dashboards/1234'",
-          "maxLength" : 200,
-          "name" : "dashboardId",
+          "doc" : "Cluster where the flow is executed",
+          "maxLength" : 100,
+          "name" : "cluster",
           "type" : "string"
         } ],
-        "maxLength" : 240,
-        "name" : "Dashboard",
+        "maxLength" : 373,
+        "name" : "DataFlow",
         "namespace" : "li",
         "owners" : [ "urn:li:corpuser:fbar", "urn:li:corpuser:bfoo" ],
         "owningTeam" : "urn:li:internalTeam:datahub"
@@ -202,123 +164,84 @@
       "type" : "AuditStamp",
       "doc" : "Audit stamp containing who last modified the record and when."
     } ]
-  }, "com.linkedin.common.OwnershipSource", "com.linkedin.common.OwnershipSourceType", "com.linkedin.common.OwnershipType", {
+  }, "com.linkedin.common.OwnershipSource", "com.linkedin.common.OwnershipSourceType", "com.linkedin.common.OwnershipType", "com.linkedin.common.Time", "com.linkedin.common.Urn", {
     "type" : "record",
-    "name" : "Status",
-    "namespace" : "com.linkedin.common",
-    "doc" : "The status metadata of an entity, e.g. dataset, metric, feature, etc.",
-    "fields" : [ {
-      "name" : "removed",
-      "type" : "boolean",
-      "doc" : "whether the entity is removed or not",
-      "default" : false
-    } ]
-  }, "com.linkedin.common.Time", {
-    "type" : "typeref",
-    "name" : "Url",
-    "namespace" : "com.linkedin.common",
-    "ref" : "string",
-    "java" : {
-      "class" : "com.linkedin.common.url.Url",
-      "coercerClass" : "com.linkedin.common.url.UrlCoercer"
-    }
-  }, "com.linkedin.common.Urn", {
-    "type" : "record",
-    "name" : "Dashboard",
-    "namespace" : "com.linkedin.dashboard",
-    "doc" : "Metadata for a dashboard",
+    "name" : "DataFlow",
+    "namespace" : "com.linkedin.datajob",
+    "doc" : "MLFeature spec. for a feature store. A collection of MLFeature metadata schema that can evolve over time.",
     "include" : [ {
       "type" : "record",
-      "name" : "DashboardKey",
-      "doc" : "Key for dashboard resource",
+      "name" : "DataFlowKey",
+      "doc" : "Key for dataset resource",
       "fields" : [ {
-        "name" : "tool",
+        "name" : "orchestrator",
         "type" : "string",
-        "doc" : "The name of the dashboard tool such as looker, redash etc.",
         "validate" : {
           "strlen" : {
-            "max" : 20,
+            "max" : 50,
             "min" : 1
           }
         }
       }, {
-        "name" : "dashboardId",
+        "name" : "flowId",
         "type" : "string",
-        "doc" : "Unique id for the dashboard. This id should be globally unique for a dashboarding tool even when there are multiple deployments of it. As an example, dashboard URL could be used here for Looker such as 'looker.linkedin.com/dashboards/1234'",
         "validate" : {
           "strlen" : {
             "max" : 200,
             "min" : 1
           }
         }
+      }, {
+        "name" : "cluster",
+        "type" : "string",
+        "validate" : {
+          "strlen" : {
+            "max" : 100,
+            "min" : 1
+          }
+        }
       } ]
-    } ],
+    }, "com.linkedin.common.ChangeAuditStamps" ],
     "fields" : [ {
       "name" : "urn",
-      "type" : "com.linkedin.common.DashboardUrn",
-      "doc" : "Dashboard urn"
+      "type" : "com.linkedin.common.DataFlowUrn",
+      "doc" : "Ownership Info"
+    }, {
+      "name" : "ownership",
+      "type" : "com.linkedin.common.Ownership",
+      "doc" : "Ownership Info",
+      "optional" : true
     }, {
       "name" : "info",
       "type" : {
         "type" : "record",
-        "name" : "DashboardInfo",
-        "doc" : "Information about a dashboard",
+        "name" : "DataFlowInfo",
+        "doc" : "Information about a Data processing flow",
         "fields" : [ {
-          "name" : "title",
+          "name" : "name",
           "type" : "string",
-          "doc" : "Title of the dashboard"
+          "doc" : "Flow name"
         }, {
           "name" : "description",
           "type" : "string",
-          "doc" : "Detailed description about the dashboard"
-        }, {
-          "name" : "charts",
-          "type" : {
-            "type" : "array",
-            "items" : "com.linkedin.common.ChartUrn"
-          },
-          "doc" : "Charts in a dashboard",
-          "default" : [ ]
-        }, {
-          "name" : "lastModified",
-          "type" : "com.linkedin.common.ChangeAuditStamps",
-          "doc" : "Captures information about who created/last modified/deleted this dashboard and when"
-        }, {
-          "name" : "dashboardUrl",
-          "type" : "com.linkedin.common.Url",
-          "doc" : "URL for the dashboard. This could be used as an external link on DataHub to allow users access/view the dashboard",
+          "doc" : "Flow description",
           "optional" : true
         }, {
-          "name" : "access",
-          "type" : "com.linkedin.common.AccessLevel",
-          "doc" : "Access level for the dashboard",
-          "optional" : true
-        }, {
-          "name" : "lastRefreshed",
-          "type" : "com.linkedin.common.Time",
-          "doc" : "The time when this dashboard last refreshed",
+          "name" : "project",
+          "type" : "string",
+          "doc" : "Optional project/namespace associated with the flow",
           "optional" : true
         } ]
       },
-      "doc" : "Basic dashboard information",
-      "optional" : true
-    }, {
-      "name" : "ownership",
-      "type" : "com.linkedin.common.Ownership",
-      "doc" : "Ownership information for the dashboard",
-      "optional" : true
-    }, {
-      "name" : "status",
-      "type" : "com.linkedin.common.Status",
-      "doc" : "Status information for the dashboard such as removed or not",
+      "doc" : "Ownership Info",
       "optional" : true
     } ]
-  }, "com.linkedin.dashboard.DashboardInfo", "com.linkedin.dashboard.DashboardKey", {
+  }, "com.linkedin.datajob.DataFlowInfo", "com.linkedin.datajob.DataFlowKey", {
     "type" : "typeref",
-    "name" : "DashboardAspect",
+    "name" : "DataFlowAspect",
     "namespace" : "com.linkedin.metadata.aspect",
-    "doc" : "A union of all supported metadata aspects for a Dashboard",
-    "ref" : [ "com.linkedin.dashboard.DashboardInfo", "com.linkedin.common.Ownership", "com.linkedin.common.Status" ]
+    "doc" : "A union of all supported metadata aspects for a Data flow",
+    "ref" : [ "com.linkedin.datajob.DataFlowInfo", "com.linkedin.common.Ownership" ]
   }, {
     "type" : "record",
     "name" : "AggregationMetadata",
@@ -549,20 +472,20 @@
     } ]
   }, "com.linkedin.metadata.restli.BackfillResultEntity", {
     "type" : "record",
-    "name" : "DashboardSnapshot",
+    "name" : "DataFlowSnapshot",
     "namespace" : "com.linkedin.metadata.snapshot",
-    "doc" : "A metadata snapshot for a specific Dashboard entity.",
+    "doc" : "A metadata snapshot for a specific DataFlow entity.",
     "fields" : [ {
       "name" : "urn",
-      "type" : "com.linkedin.common.DashboardUrn",
+      "type" : "com.linkedin.common.DataFlowUrn",
       "doc" : "URN for the entity the metadata snapshot is associated with."
     }, {
       "name" : "aspects",
       "type" : {
         "type" : "array",
-        "items" : "com.linkedin.metadata.aspect.DashboardAspect"
+        "items" : "com.linkedin.metadata.aspect.DataFlowAspect"
       },
-      "doc" : "The list of metadata aspects associated with the dashboard. Depending on the use case, this can either be all, or a selection, of supported aspects."
+      "doc" : "The list of metadata aspects associated with the data flow. Depending on the use case, this can either be all, or a selection, of supported aspects."
     } ]
   }, {
     "type" : "record",
@@ -575,15 +498,15 @@
     }
   } ],
   "schema" : {
-    "name" : "dashboards",
-    "namespace" : "com.linkedin.dashboard",
-    "path" : "/dashboards",
-    "schema" : "com.linkedin.dashboard.Dashboard",
-    "doc" : "generated from: com.linkedin.metadata.resources.dashboard.Dashboards",
+    "name" : "dataFlows",
+    "namespace" : "com.linkedin.dataflow",
+    "path" : "/dataFlows",
+    "schema" : "com.linkedin.datajob.DataFlow",
+    "doc" : "generated from: com.linkedin.metadata.resources.dashboard.DataFlows",
     "collection" : {
       "identifier" : {
         "name" : "key",
-        "type" : "com.linkedin.dashboard.DashboardKey",
+        "type" : "com.linkedin.datajob.DataFlowKey",
         "params" : "com.linkedin.restli.common.EmptyRecord"
       },
       "supports" : [ "batch_get", "get", "get_all" ],
@@ -702,16 +625,16 @@
           "type" : "{ \"type\" : \"array\", \"items\" : \"string\" }",
           "optional" : true
         } ],
-        "returns" : "com.linkedin.metadata.snapshot.DashboardSnapshot"
+        "returns" : "com.linkedin.metadata.snapshot.DataFlowSnapshot"
       }, {
         "name" : "ingest",
         "parameters" : [ {
           "name" : "snapshot",
-          "type" : "com.linkedin.metadata.snapshot.DashboardSnapshot"
+          "type" : "com.linkedin.metadata.snapshot.DataFlowSnapshot"
         } ]
       } ],
       "entity" : {
-        "path" : "/dashboards/{key}"
+        "path" : "/dataFlows/{key}"
       }
     }
   }

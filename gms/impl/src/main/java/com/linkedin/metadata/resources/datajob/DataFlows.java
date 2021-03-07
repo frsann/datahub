@@ -110,7 +110,7 @@ public class DataFlows extends BaseBrowsableEntityResource<
         new DataFlowKey()
             .setOrchestrator(urn.getOrchestratorEntity())
             .setFlowId(urn.getFlowIdEntity())
-            .setCluster(urn.getClusterEntity());
+            .setCluster(urn.getClusterEntity()),
         new EmptyRecord());
   }
 

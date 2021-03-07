@@ -3,8 +3,7 @@ namespace com.linkedin.datajob
 import com.linkedin.common.ChangeAuditStamps
 import com.linkedin.common.DataJobUrn
 import com.linkedin.common.Ownership
-import com.linkedin.datajob.DataJobInfo
-import com.linkedin.datajob.DataJobInputOutput
+
 
 import com.linkedin.ml.metadata.MLFeatureProperties
 
@@ -12,6 +11,11 @@ import com.linkedin.ml.metadata.MLFeatureProperties
  * MLFeature spec. for a feature store. A collection of MLFeature metadata schema that can evolve over time.
  */
 record DataJob includes DataJobKey, ChangeAuditStamps {
+  /**
+   * Ownership Info
+   */
+  urn: DataJobUrn
+
 
   /**
    * Ownership Info

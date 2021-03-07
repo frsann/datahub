@@ -12,7 +12,7 @@ import com.linkedin.data.template.RecordTemplate;
 import com.linkedin.metadata.builders.graph.relationship.BaseRelationshipBuilder;
 import com.linkedin.metadata.builders.graph.relationship.OwnedByBuilderFromOwnership;
 import com.linkedin.metadata.builders.graph.relationship.ConsumesBuilderFromDataJobInputOutput;
-import com.linkedin.metadata.builders.graph.relationship.DownstreamBuilderFromDataJobInputOutput;
+import com.linkedin.metadata.builders.graph.relationship.DownstreamOfBuilderFromDataJobInputOutput;
 import com.linkedin.metadata.builders.graph.relationship.ProducesBuilderFromDataJobInputOutput;
 
 import com.linkedin.metadata.entity.DataJobEntity;
@@ -27,7 +27,7 @@ public class DataJobGraphBuilder extends BaseGraphBuilder<DataJobSnapshot>  {
             {
                 add(new OwnedByBuilderFromOwnership());
                 add(new ConsumesBuilderFromDataJobInputOutput());
-                add(new DownstreamBuilderFromDataJobInputOutput());
+                add(new DownstreamOfBuilderFromDataJobInputOutput());
                 add(new ProducesBuilderFromDataJobInputOutput());
             }
         });

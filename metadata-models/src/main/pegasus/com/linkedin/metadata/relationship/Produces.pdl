@@ -1,3 +1,5 @@
+namespace com.linkedin.metadata.relationship
+
 /**
  * A generic model for the
  */

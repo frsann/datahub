@@ -19,6 +19,11 @@ record DataFlowDocument includes BaseDocument {
   flowId: optional string
 
   /**
+   * Title of the dashboard
+   */
+  name: optional string
+
+  /**
    * Detailed description about the dashboard
    */
   description: optional string
@@ -32,6 +37,11 @@ record DataFlowDocument includes BaseDocument {
    * Dashboard tool ex: Looker, Redash
    */
   cluster: optional string
+
+  /**
+   * Dashboard tool ex: Looker, Redash
+   */
+  project: optional string
 
   /**
    * LDAP usernames of corp users who are the owners of this dashboard

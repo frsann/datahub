@@ -109,8 +109,8 @@ public class DataJobs extends BaseBrowsableEntityResource<
   protected ComplexResourceKey<DataJobKey, EmptyRecord> toKey(@Nonnull DataJobUrn urn) {
     return new ComplexResourceKey<>(
         new DataJobKey()
-            .setDataFlow(urn.getDataFlowEntity())
-            .setJobId(urn.getJobIdEntity());
+            .setDataFlow(urn.getFlowEntity())
+            .setJobId(urn.getJobIdEntity()),
         new EmptyRecord());
   }
 
@@ -119,7 +119,7 @@ public class DataJobs extends BaseBrowsableEntityResource<
   protected DataJob toValue(@Nonnull DataJobSnapshot snapshot) {
     final DataJob value = new DataJob()
         .setUrn(snapshot.getUrn())
-        .setDataFlow(snapshot.getUrn().getDataFlowEntity())
+        .setDataFlow(snapshot.getUrn().getFlowEntity())
         .setJobId(snapshot.getUrn().getJobIdEntity());
     ModelUtils.getAspectsFromSnapshot(snapshot).forEach(aspect -> {
       if (aspect instanceof DataJobInfo) {

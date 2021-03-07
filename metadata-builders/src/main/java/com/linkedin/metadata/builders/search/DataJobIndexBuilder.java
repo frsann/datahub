@@ -3,11 +3,10 @@ package com.linkedin.metadata.builders.search;
 import com.linkedin.common.Ownership;
 import com.linkedin.common.urn.DataJobUrn;
 import com.linkedin.datajob.DataJobInfo;
-import com.linkedin.datajob.DataJobInputOutput;
 import com.linkedin.data.template.RecordTemplate;
 import com.linkedin.data.template.StringArray;
-import com.linkedin.metadata.search.DataFlowDocument;
-import com.linkedin.metadata.snapshot.DataFlowSnapshot;
+import com.linkedin.metadata.search.DataJobDocument;
+import com.linkedin.metadata.snapshot.DataJobSnapshot;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -17,23 +16,22 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Slf4j
-public class DataJobIndexBuilder extends BaseIndexBuilder<DataFlowDocument> {
+public class DataJobIndexBuilder extends BaseIndexBuilder<DataJobDocument> {
   public DataJobIndexBuilder() {
     super(Collections.singletonList(DataJobSnapshot.class), DataJobDocument.class);
   }
 
   @Nonnull
   private static String buildBrowsePath(@Nonnull DataJobUrn urn) {
-    return ("/" + urn.getDataFlowEntity().getDataFlowId() + "/"  + urn.getJobId()).toLowerCase();
+    return ("/" + urn.getFlowEntity().getFlowIdEntity() + "/"  + urn.getJobIdEntity()).toLowerCase();
   }
 
 
-  // TODO: figure this out!
   @Nonnull
   private static DataJobDocument setUrnDerivedFields(@Nonnull DataJobUrn urn) {
     return new DataJobDocument()
         .setUrn(urn)
-        .setDataFlow(urn.getDataFlowEntity().getDataFlowId())
+        .setDataFlow(urn.getFlowEntity().getFlowIdEntity())
         .setJobId(urn.getJobIdEntity())
         .setBrowsePaths(new StringArray(Collections.singletonList(buildBrowsePath(urn))));
   }
@@ -46,9 +44,6 @@ public class DataJobIndexBuilder extends BaseIndexBuilder<DataFlowDocument> {
     if (info.getDescription() != null) {
         document.setDescription(info.getDescription());
     }
-    if (info.getType() != null) {
-      document.setType(info.getType());
-    }
     return document;
   }
 
@@ -60,7 +55,7 @@ public class DataJobIndexBuilder extends BaseIndexBuilder<DataFlowDocument> {
   }
 
   @Nonnull
-  private List<DataJonDocument> getDocumentsToUpdateFromSnapshotType(@Nonnull DataJobSnapshot snapshot) {
+  private List<DataJobDocument> getDocumentsToUpdateFromSnapshotType(@Nonnull DataJobSnapshot snapshot) {
     DataJobUrn urn = snapshot.getUrn();
     return snapshot.getAspects().stream().map(aspect -> {
       if (aspect.isDataJobInfo()) {
