@@ -17,12 +17,11 @@ record DataJobEntity includes BaseEntity {
   /**
    *
    */
-  flow: DataFlowUrn
+  flow: optional DataFlowUrn
 
   /**
    *
    */
-  jobId: string
-
+  jobId: optional string
 
 }
