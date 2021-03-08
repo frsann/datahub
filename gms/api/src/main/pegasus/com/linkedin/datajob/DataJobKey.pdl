@@ -4,18 +4,18 @@ import com.linkedin.common.DataFlowUrn
 
 
 /**
- * Key for dataset resource
+ * Key for data job resource
  */
 record DataJobKey {
 
   /**
-   * Standardized platform urn where dataset is defined. The data platform Urn (urn:li:platform:{platform_name})
+   * Standardized dataflow urn where flow is defined. The data flow Urn (urn:li:dataflow:{orchestrator,flow_id, cluster})
    */
   @validate.`com.linkedin.dataset.rest.validator.DataFlowValidator` = { }
   dataFlow: DataFlowUrn
 
   /**
-   * Dataset native name e.g. {db}.{table}, /dir/subdir/{name}, or {name}
+   * The Id of the data job
    */
   @validate.strlen = {
     "max" : 200,

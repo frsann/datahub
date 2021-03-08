@@ -5,11 +5,11 @@ import com.linkedin.common.DataFlowUrn
 import com.linkedin.common.Ownership
 
 /**
- * MLFeature spec. for a feature store. A collection of MLFeature metadata schema that can evolve over time.
+ * Metadata for DataFlow
  */
 record DataFlow includes DataFlowKey, ChangeAuditStamps {
   /**
-   * Ownership Info
+   * DataFlow urn
    */
   urn: DataFlowUrn
 
@@ -19,7 +19,7 @@ record DataFlow includes DataFlowKey, ChangeAuditStamps {
   ownership: optional Ownership
 
   /**
-   * Ownership Info
+   * Optional additional metadata about the data flow
    */
    info: optional DataFlowInfo
 

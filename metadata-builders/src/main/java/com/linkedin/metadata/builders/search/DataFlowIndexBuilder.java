@@ -27,7 +27,6 @@ public class DataFlowIndexBuilder extends BaseIndexBuilder<DataFlowDocument> {
   }
 
 
-  // TODO: figure this out!
   @Nonnull
   private static DataFlowDocument setUrnDerivedFields(@Nonnull DataFlowUrn urn) {
     return new DataFlowDocument()

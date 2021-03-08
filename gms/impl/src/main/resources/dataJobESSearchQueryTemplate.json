@@ -4,9 +4,8 @@
       "query_string": {
         "query": "$INPUT",
         "fields": [
-          "title^8",
-          "title.delimited^4",
-          "tool^4"
+          "name^4",
+          "dataFlow"
         ],
         "default_operator": "and",
         "analyzer": "standard"
@@ -24,4 +23,4 @@
     ],
     "score_mode": "multiply"
   }
-} // TODO: figure this out!
+}

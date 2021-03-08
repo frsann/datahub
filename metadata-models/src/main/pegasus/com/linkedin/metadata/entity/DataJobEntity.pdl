@@ -5,22 +5,22 @@ import com.linkedin.common.DataFlowUrn
 
 
 /**
- * Data model for a DataFlow entity
+ * Data model for a DataJob entity
  */
 record DataJobEntity includes BaseEntity {
 
   /**
-   * Urn for the DataJobUrn
+   * Urn for the DataJob
    */
   urn: DataJobUrn
 
   /**
-   *
+   * Urn of the associated DataFlow
    */
   flow: optional DataFlowUrn
 
   /**
-   *
+   * Id of the job
    */
   jobId: optional string
 

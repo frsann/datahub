@@ -2,12 +2,12 @@ namespace com.linkedin.datajob
 
 
 /**
- * Key for dataset resource
+ * Key for data flow resource
  */
 record DataFlowKey {
 
   /**
-   *
+   * The workflow orchestrator, ex: Azkaban, Airflow
    */
   @validate.strlen = {
     "max" : 50,
@@ -16,7 +16,7 @@ record DataFlowKey {
   orchestrator: string
 
   /**
-   *
+   * Id of the flow
    */
   @validate.strlen = {
     "max" : 200,
@@ -25,7 +25,7 @@ record DataFlowKey {
   flowId: string
 
   /**
-   *
+   * Cluster of the flow
    */
   @validate.strlen = {
     "max" : 100,

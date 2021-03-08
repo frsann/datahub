@@ -7,11 +7,11 @@ import com.linkedin.common.Ownership
 
 
 /**
- * MLFeature spec. for a feature store. A collection of MLFeature metadata schema that can evolve over time.
+ * Metadata bout DataJob
  */
 record DataJob includes DataJobKey, ChangeAuditStamps {
   /**
-   * Ownership Info
+   * DataJob urn
    */
   urn: DataJobUrn
 
@@ -22,12 +22,12 @@ record DataJob includes DataJobKey, ChangeAuditStamps {
   ownership: optional Ownership
 
   /**
-   * Ownership Info
+   * Input and output datasets of job
    */
    inputOutput: optional DataJobInputOutput
 
   /**
-   * Ownership Info
+   * Optional additional metadata about the job
    */
    info: optional DataJobInfo
 

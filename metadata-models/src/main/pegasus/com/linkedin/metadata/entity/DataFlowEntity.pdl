@@ -13,19 +13,18 @@ record DataFlowEntity includes BaseEntity {
   urn: DataFlowUrn
 
   /**
-   *
+   * Workflow orchestrator ex: Azkaban, Airflow
    */
   orchestrator: optional string
 
   /**
-   *
+   * Id of the flow
    */
   flowId: optional string
 
   /**
-   *
+   * Cluster of the flow
    */
   cluster: optional string
-
 
 }

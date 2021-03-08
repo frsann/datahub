@@ -1,4 +1,4 @@
-package com.linkedin.ml.client;
+package com.linkedin.datajob.client;
 
 import com.linkedin.common.urn.DataJobUrn;
 import com.linkedin.data.template.StringArray;
@@ -78,7 +78,7 @@ public class DataJobs extends BaseSearchableClient<DataJob> {
      * @param requestFilters search filters
      * @param start start offset for search results
      * @param count max number of search results requested
-     * @return CollectionResponse of {@link MLModel}
+     * @return CollectionResponse of {@link DataJob}
      * @throws RemoteInvocationException
      */
     @Nonnull
@@ -96,7 +96,7 @@ public class DataJobs extends BaseSearchableClient<DataJob> {
      * Autocomplete search for data jobs in search bar
      *
      * @param query search query
-     * @param field field of the ML Model
+     * @param field field of the Data Job
      * @param requestFilters autocomplete filters
      * @param limit max number of autocomplete results
      * @throws RemoteInvocationException

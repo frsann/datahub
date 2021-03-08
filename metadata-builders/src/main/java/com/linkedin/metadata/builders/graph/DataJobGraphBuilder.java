@@ -19,8 +19,6 @@ import com.linkedin.metadata.entity.DataJobEntity;
 import com.linkedin.metadata.snapshot.DataJobSnapshot;
 
 
-// TODO: how to create the IsPartOf relationship to DataFlow?
-
 public class DataJobGraphBuilder extends BaseGraphBuilder<DataJobSnapshot>  {
     private static final Set<BaseRelationshipBuilder> RELATIONSHIP_BUILDERS =
         Collections.unmodifiableSet(new HashSet<BaseRelationshipBuilder>() {

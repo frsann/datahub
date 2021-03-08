@@ -14,37 +14,37 @@ record DataFlowDocument includes BaseDocument {
   urn: DataFlowUrn
 
   /**
-   * Title of the dashboard
+   * Id of the flow
    */
   flowId: optional string
 
   /**
-   * Title of the dashboard
+   * Name of the flow
    */
   name: optional string
 
   /**
-   * Detailed description about the dashboard
+   * Description of the flow
    */
   description: optional string
 
   /**
-   * Dashboard tool ex: Looker, Redash
+   * Workflow orchestrator ex: Azkaban, Airflow
    */
   orchestrator: optional string
 
   /**
-   * Dashboard tool ex: Looker, Redash
+   * Cluster of the flow
    */
   cluster: optional string
 
   /**
-   * Dashboard tool ex: Looker, Redash
+   * Project of the flow
    */
   project: optional string
 
   /**
-   * LDAP usernames of corp users who are the owners of this dashboard
+   * LDAP usernames of corp users who are the owners of this flow
    */
   owners: optional array[string]
 

@@ -14,27 +14,27 @@ record DataJobDocument includes BaseDocument {
   urn: DataJobUrn
 
   /**
-   * Job description
+   * Optional description of the job
    */
   description: optional string
 
   /**
-   * Title of the dashboard
+   * Optional name of the job
    */
   name: optional string
 
   /**
-   * Title of the dashboard
+   * Name of the associated data flow
    */
   dataFlow: optional string
 
   /**
-   * Detailed description about the dashboard
+   * Id of the job
    */
   jobId: optional string
 
   /**
-   * LDAP usernames of corp users who are the owners of this dashboard
+   * LDAP usernames of corp users who are the owners of this job
    */
   owners: optional array[string]
 
