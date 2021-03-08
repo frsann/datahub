@@ -11,9 +11,8 @@ import com.linkedin.common.urn.DataJobUrn;
 import com.linkedin.data.template.RecordTemplate;
 import com.linkedin.metadata.builders.graph.relationship.BaseRelationshipBuilder;
 import com.linkedin.metadata.builders.graph.relationship.OwnedByBuilderFromOwnership;
-import com.linkedin.metadata.builders.graph.relationship.ConsumesBuilderFromDataJobInputOutput;
-import com.linkedin.metadata.builders.graph.relationship.DownstreamOfBuilderFromDataJobInputOutput;
-import com.linkedin.metadata.builders.graph.relationship.ProducesBuilderFromDataJobInputOutput;
+import com.linkedin.metadata.builders.graph.relationship.RelationshipBuilderFromDataJobInputOutput;
+
 
 import com.linkedin.metadata.entity.DataJobEntity;
 import com.linkedin.metadata.snapshot.DataJobSnapshot;
@@ -24,9 +23,7 @@ public class DataJobGraphBuilder extends BaseGraphBuilder<DataJobSnapshot>  {
         Collections.unmodifiableSet(new HashSet<BaseRelationshipBuilder>() {
             {
                 add(new OwnedByBuilderFromOwnership());
-                add(new ConsumesBuilderFromDataJobInputOutput());
-                add(new DownstreamOfBuilderFromDataJobInputOutput());
-                add(new ProducesBuilderFromDataJobInputOutput());
+                add(new RelationshipBuilderFromDataJobInputOutput());
             }
         });
 
